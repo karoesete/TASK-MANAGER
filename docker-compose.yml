@@ -1,0 +1,40 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: my-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: taskmanager
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mongo_net
+
+  mongo-express:
+    image: mongo-express:1.0
+    container_name: my-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb       # ← Must match service name above
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: password
+    depends_on:
+      - mongodb
+    networks:
+      - mongo_net
+
+volumes:
+  mongo_data:
+
+networks:
+  mongo_net:
+    driver: bridge
