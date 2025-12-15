@@ -8,7 +8,7 @@ A complete, production-ready task management application designed for **Ubuntu S
 
 ✅ Full CRUD task management with responsive UI
 
-✅ Runs on Ubuntu Server (20.04/22.04 LTS) using Docker Engine (no Docker Desktop needed)
+✅ Runs on Ubuntu Server (20.04/22.04 LTS) using Docker Engine 
 
 ✅ Secure container image built with best practices (non-root user, minimal size)
 
